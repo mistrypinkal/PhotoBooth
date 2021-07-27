@@ -1,0 +1,72 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion build_versions.target_sdk
+
+    defaultConfig {
+        applicationId "com.test.photoBooth"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            ext.alwaysUpdateBuildId = false
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(':base')
+    implementation project(':external')
+    implementation project(':repository')
+
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin_core.core
+    implementation deps.koin.core
+    implementation deps.appcompat
+    implementation deps.material
+    implementation deps.constraint_layout
+    implementation deps.navigation_fragment_ktx
+    implementation deps.navigation_ui_ktx
+
+    implementation deps.multidex
+    implementation deps.koin.core
+
+    implementation deps.glide.core
+    kapt deps.glide.compiler
+    implementation deps.zelory
+
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.ext_junit
+    androidTestImplementation deps.test.espresso_core
+}

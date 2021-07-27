@@ -1,0 +1,91 @@
+import org.omg.CORBA.RepositoryIdHelper
+
+ext.deps = [:]
+ext.build_versions = [
+        min_sdk   : 21,
+        target_sdk: 30,
+]
+def versions = [
+        android_gradle_plugin: '4.1.2',
+        appcompat            : '1.2.0',
+        material             : '1.2.1',
+        constraint_layout    : '2.0.4',
+        navigation_ktx       : '2.2.2',
+        lifecycle            : '2.2.0',
+        koin                 : '2.1.6',
+        kotlin               : '1.4.31',
+        kotlin_core          : '1.2.0',
+        junit                : '4.+',
+        ext_junit            : '1.1.1',
+        espresso_core        : '3.2.0',
+        room                 : '2.2.3',
+        multidex             : '2.0.1',
+        glide                : '4.11.0',
+        zelory               : '2.1.0',
+
+]
+
+def deps = [
+        appcompat              : "androidx.appcompat:appcompat:$versions.appcompat",
+        material               : "com.google.android.material:material:$versions.material",
+        constraint_layout      : "androidx.constraintlayout:constraintlayout:$versions.constraint_layout",
+        navigation_fragment_ktx: "androidx.navigation:navigation-fragment-ktx:$versions.navigation_ktx",
+        navigation_ui_ktx      : "androidx.navigation:navigation-ui-ktx:$versions.navigation_ktx",
+        multidex               : "androidx.multidex:multidex:$versions.multidex",
+        zelory                 : "id.zelory:compressor:$versions.zelory",
+]
+
+deps.kotlin = [
+        plugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+        stdlib: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$versions.kotlin",
+]
+
+deps.kotlin_core = [
+        core: "androidx.core:core-ktx:$versions.kotlin_core",
+]
+
+deps.lifecycle = [
+        extensions: [
+                "androidx.lifecycle:lifecycle-process:$versions.lifecycle",
+                "androidx.lifecycle:lifecycle-livedata-ktx:$versions.lifecycle",
+                "androidx.lifecycle:lifecycle-livedata-core:$versions.lifecycle",
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+        ],
+]
+
+deps.koin = [
+        core: ["org.koin:koin-android:$versions.koin",
+               "org.koin:koin-androidx-scope:$versions.koin",
+               "org.koin:koin-androidx-viewmodel:$versions.koin",
+               "org.koin:koin-androidx-fragment:$versions.koin",
+        ],
+]
+
+deps.plugin = [
+        android_gradle: "com.android.tools.build:gradle:$versions.android_gradle_plugin",
+]
+
+deps.test = [
+        junit        : "junit:junit:$versions.junit",
+        ext_junit    : "androidx.test.ext:junit:$versions.ext_junit",
+        espresso_core: "androidx.test.espresso:espresso-core:$versions.espresso_core",
+]
+
+deps.database = [
+        room_runtime : "androidx.room:room-runtime:$versions.room",
+        room_compiler: "androidx.room:room-compiler:$versions.room",
+]
+
+deps.glide = [
+        core    : "com.github.bumptech.glide:glide:$versions.glide",
+        compiler: "com.github.bumptech.glide:compiler:$versions.glide",
+]
+
+ext.deps = deps
+
+static def addRepos(RepositoryIdHelper handler) {
+    handler.google()
+    handler.jcenter()
+}
+
+ext.addRepos = this.&addRepos

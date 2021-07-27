@@ -1,0 +1,5 @@
+include ':repository'
+include ':external'
+include ':base'
+include ':app'
+rootProject.name = "PhotoBooth"
