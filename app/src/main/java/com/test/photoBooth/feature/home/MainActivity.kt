@@ -77,6 +77,9 @@ class MainActivity : BaseViewModelActivity<ActivityMainBinding, MainViewModel>()
         return date.time
     }
 
+    /**
+     * Get Image path
+     */
     private fun getImagePath(data: Intent): String? {
         return data.getStringExtra(ImageConstant.EXTRA_FILE_PATH)
     }
